@@ -8,7 +8,7 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 {{--  <h3 class="panel-title">Incidencias asignadas a mi</h3>  --}}
-                <h4>Incidencias asignadas a mi <span class="label label-default"></span></h4>
+                <h4>Solicitudes asignadas a mi <span class="label label-default"></span></h4>
             </div>
             <div class="panel-body">
                 <table class="table table-bordered">
@@ -40,7 +40,7 @@
 
         <div class="panel panel-info">
             <div class="panel-heading">
-                <h4>Incidencias sin asignar <span class="label label-default"></span></h4>
+                <h4>Solicitudes sin asignar <span class="label label-default"></span></h4>
             </div>
             <div class="panel-body">
                 <table class="table table-bordered">
@@ -78,7 +78,7 @@
 
         <div class="panel panel-info">
             <div class="panel-heading">
-                <h4>Incidencias asignadas a otros<span class="label label-default"></span></h4>
+                <h4>Solicitudes asignadas a otros<span class="label label-default"></span></h4>
                 
             </div>
             <div class="panel-body">
