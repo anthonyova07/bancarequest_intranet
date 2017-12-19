@@ -48,6 +48,11 @@ class HomeController extends Controller
         // ->where('support_id',$requirementUser->level_id)
     }
 
+    public function view()
+    {
+        return view('welcome');
+    }
+
     public function selectRequirement($id)
     {
         //validar que el usuario este asociado con el requerimiento
