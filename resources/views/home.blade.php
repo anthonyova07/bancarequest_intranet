@@ -5,9 +5,9 @@
     <div class="panel-heading">Dashboard</div>
 
     <div class="panel-body">
-        @if (auth()->user()->is_admin)
+        @if (auth()->user()->is_admin  ||  auth()->user()->is_support)
 
-        @if (auth()->user()->is_support)
+        {{--  @if (auth()->user()->is_support)  --}}
         <div class="panel panel-info">          
             <div class="panel-heading">               
                 <h4>Solicitudes asignadas a mi <span class="label label-default"></span></h4>
@@ -40,7 +40,8 @@
             </div> 
         </div> 
         @endif
-
+        {{--  @endif  --}}
+        @if (auth()->user()->is_admin  ||  auth()->user()->is_support)
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4>Solicitudes sin asignar <span class="label label-default"></span></h4>
@@ -62,7 +63,7 @@
                          @foreach ($pending_incidents as $incident)
                             <tr>
                                 <td>{{$incident->id}}</td>
-                                <td>{{$incident->category['name']}}</td>
+                                <td>{{$incident->category_name}}</td>
                                 <td>{{$incident->priority_full}}</td>
                                 <td>{{$incident->id}}</td>
                                 <td>{{$incident->created_at}}</td>
@@ -79,6 +80,7 @@
         </div> 
         @endif
 
+     
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4>Solicitudes reportadas por mi<span class="label label-default"></span></h4>
@@ -101,20 +103,20 @@
                           @foreach ($incidents_by_me as $incident)
                             <tr>
                                 <td>{{$incident->id}}</td>
-                                <td>{{$incident->category['name']}}</td>
+                                <td>{{$incident->category_name}}</td>
                                 <td>{{$incident->priority_full}}</td>
                                 <td>{{$incident->id}}</td>
                                 <td>{{$incident->created_at}}</td>
                                 <td>{{$incident->title_short}}</td>
                                 <td>
-                                    {{$incident->support_id}}  
+                                    {{$incident->support_id ?: 'Sin asignar'}}  
                                 </td>
                             </tr>
                         @endforeach                    
                 </table>
             </div> 
         </div> 
-
+        
     </div>
 </div>
       
