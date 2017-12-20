@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <select id="list-of-requirements" class="form-control">
                                     @foreach (auth()->user()->list_of_requirements as $requirement)
-                                    <option value="{{ $requirement->id }}">{{ $requirement->name }}</option>
+                                    <option value="{{ $requirement->id }}" @if($requirement->id==auth()->user()->selected_requirement_id) selected @endif>{{ $requirement->name }}</option>
                                     @endforeach
                                 </select>
                             </div>                     
@@ -102,8 +102,7 @@
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
     
-    <script src="{{ asset('js/app.js') }}"></script>
-    {{--  <script src="/js/app2.js"></script>  --}}
+    <script src="{{ asset('js/app.js') }}"></script>    
     @yield('scripts')
    
 </body>
