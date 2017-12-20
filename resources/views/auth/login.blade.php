@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="panel panel-default">
+<div class="panel panel-primary" style="box-shadow: 4px 3px 7px 1px black;">
     <div class="panel-heading">Login</div>
 
     <div class="panel-body">
