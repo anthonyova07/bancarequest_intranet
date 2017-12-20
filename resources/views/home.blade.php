@@ -5,9 +5,11 @@
     <div class="panel-heading">Dashboard</div>
 
     <div class="panel-body">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                {{--  <h3 class="panel-title">Incidencias asignadas a mi</h3>  --}}
+        @if (auth()->user()->is_admin)
+
+        @if (auth()->user()->is_support)
+        <div class="panel panel-info">          
+            <div class="panel-heading">               
                 <h4>Solicitudes asignadas a mi <span class="label label-default"></span></h4>
             </div>
             <div class="panel-body">
@@ -19,7 +21,7 @@
                             <th>Prioridad</th>
                             <th>Estado</th>
                             <th>Fecha de creacion</th>
-                            <th>Resumen</th>
+                            <th>Titulo</th>
                         </tr>                    
                     </thead>
                     <tbody id="dashboard_my_incidents">
@@ -27,16 +29,17 @@
                             <tr>
                                 <td>{{$incident->id}}</td>
                                 <td>{{$incident->category->name}}</td>
-                                <td>{{$incident->priority}}</td>
+                                <td>{{$incident->priority_full}}</td>
                                 <td>{{$incident->id}}</td>
                                 <td>{{$incident->created_at}}</td>
-                                <td>{{$incident->description}}</td>
+                                <td>{{$incident->title_short}}</td>
                             </tr>
                         @endforeach                    
                     </tbody>                
                 </table>
             </div> 
         </div> 
+        @endif
 
         <div class="panel panel-info">
             <div class="panel-heading">
@@ -59,26 +62,26 @@
                          @foreach ($pending_incidents as $incident)
                             <tr>
                                 <td>{{$incident->id}}</td>
-                                <td>{{$incident->category->name}}</td>
-                                <td>{{$incident->priority}}</td>
+                                <td>{{$incident->category['name']}}</td>
+                                <td>{{$incident->priority_full}}</td>
                                 <td>{{$incident->id}}</td>
                                 <td>{{$incident->created_at}}</td>
-                                <td>{{$incident->description}}</td>
+                                <td>{{$incident->title_short}}</td>
                                 <td>
                                     <a href="" class="btn btn-primary btn-sm">
-                                        Atender                                   
-                                    
-                                    </a>                                
+                                        Atender
+                                    </a>                               
                                 </td>
                             </tr>
                         @endforeach                    
                 </table>
             </div> 
         </div> 
+        @endif
 
         <div class="panel panel-info">
             <div class="panel-heading">
-                <h4>Solicitudes asignadas a otros<span class="label label-default"></span></h4>
+                <h4>Solicitudes reportadas por mi<span class="label label-default"></span></h4>
                 
             </div>
             <div class="panel-body">
@@ -94,15 +97,15 @@
                             <th>Responsable</th>
                         </tr>                    
                     </thead>
-                    <tbody id="dashboard_to_others"></tbody>
+                    <tbody id="dashboard_by_me"></tbody>
                           @foreach ($incidents_by_me as $incident)
                             <tr>
                                 <td>{{$incident->id}}</td>
-                                <td>{{$incident->category->name}}</td>
-                                <td>{{$incident->priority}}</td>
+                                <td>{{$incident->category['name']}}</td>
+                                <td>{{$incident->priority_full}}</td>
                                 <td>{{$incident->id}}</td>
                                 <td>{{$incident->created_at}}</td>
-                                <td>{{$incident->description}}</td>
+                                <td>{{$incident->title_short}}</td>
                                 <td>
                                     {{$incident->support_id}}  
                                 </td>
