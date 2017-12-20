@@ -21,7 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
 
             $table->smallInteger('role')->default(2); // 0:ADMIN | 1:Soporte o Agente | 2: Cliente
-                    
+                 
+            
+            
            
             $table->rememberToken();
             $table->softDeletes();
