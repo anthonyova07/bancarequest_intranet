@@ -35,6 +35,6 @@ class LevelsTableSeeder extends Seeder
             'requirement_id'    => 2
 
         ]);
-
+     
     }
 }
