@@ -18,7 +18,7 @@ class CreateLevelsTable extends Migration
 
             $table->string('name');
 
-            $table->integer('requirement_id')->unsigned()->nullable();
+            $table->integer('requirement_id')->unsigned();
             $table->foreign('requirement_id')->references('id')->on('requirements');
 
 
