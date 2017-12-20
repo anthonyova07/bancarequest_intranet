@@ -12,11 +12,11 @@
                     <a href="/reportar">Crear Solicitud</a>
                 </li>
                 
-                @if(! auth()->user()->is_client)
+                {{--  @if(! auth()->user()->is_client)
                 <li  @if(request()->is('ver_reportes')) class="active" @endif>
-                    <a href="/ver_reportes">Ver Solicitudes</a>
+                    <a href="/home">Ver Solicitudes</a>
                 </li>
-                @endif
+                @endif  --}}
                 
                 
                 @if(auth()->user()->is_admin)
