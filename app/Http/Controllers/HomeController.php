@@ -45,6 +45,10 @@ class HomeController extends Controller
 
             $pending_incidents = Incident::where('support_id', null)
                         ->where('level_id',$requirementUser['level_id'])->get();
+
+            $incidents_by_me = Incident::where('client_id', $user->id)
+                        ->where('requirement_id',$selected_requirement_id)->get();
+            
             }
             
         $incidents_by_me = Incident::where('client_id', $user->id)
