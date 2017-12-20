@@ -15,8 +15,7 @@ class RequirementUserController extends Controller
         // El nivel pertenezca al requerimiento
         // Asegurar que el requerimiento exista.
         // Asegurar que el nivel exista.
-        // Asegurar que el usuario exista.
-        
+        // Asegurar que el usuario exista.        
         $requirement_id = $request->input('requirement_id');
         $user_id = $request->input('user_id');
 
@@ -41,7 +40,7 @@ class RequirementUserController extends Controller
     public function delete($id)
     {
         RequirementUser::find($id)->delete();
-        return back();
+        return back()->with('notification', 'El requerimiento ha sido eliminado al usuario.');                                        ;
     }
 
 }
