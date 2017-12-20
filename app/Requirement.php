@@ -21,12 +21,7 @@ class Requirement extends Model
     {
         return $this->belongsToMany('App\User');
     }
-
-
-
-
-    //accesors
-
+    
     public function categories()
     {
         return $this->belongsToMany('App\Category');
@@ -38,7 +33,14 @@ class Requirement extends Model
         return $this->hasMany('App\Level');
     }
 
+    //accesors
 
+    public function getFirstLevelIdAttribute()
+    {
+        return $this->levels->first()->id;
+    }
+
+   
 
     
 }
