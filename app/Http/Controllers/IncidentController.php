@@ -17,6 +17,11 @@ class IncidentController extends Controller
         $this->middleware('auth');
     }
 
+    public function show($id)
+    {
+        return view('incidents.show')->with('incident');
+    }
+
 
     public function create() 
     {
@@ -29,7 +34,7 @@ class IncidentController extends Controller
 
 
         // $categories = Category::where('requirement_id', 1)->get();
-        return view('report')->with(compact('categories'));
+        return view('incidents.create')->with(compact('categories'));
         //->with(compact('categories'));
     }
 
@@ -59,9 +64,10 @@ class IncidentController extends Controller
         $user = auth()->user();
 
         $incident->client_id = $user->id;
-        // $incident->requirement_id = $user->selected_requirement_id;
-        // $incident->level_id = Requirement::find($user->selected_requirement_id)->first_level_id;
-        
+        $incident->requirement_id = $user->selected_requirement_id;
+        $incident->level_id = Requirement::find($user->selected_requirement_id)->first_level_id;
+        // $incident->support_id = $user->id;
+
         // dd($incident->level_id);
         
         $incident->save();
