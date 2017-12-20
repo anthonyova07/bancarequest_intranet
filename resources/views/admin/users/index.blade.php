@@ -29,12 +29,12 @@
 
             <div class="form-group">
                  <label for="email">Email</label>
-                 <input type="email" name="email" placeholder="Introduzca su correo electronico" class="form-control" value="">                        
+                 <input type="email" name="email" placeholder="Introduzca su correo electronico" class="form-control" value="{{  old('email') }}" required>                        
              </div>
 
             <div class="form-group">
                  <label for="name">Nombre</label>
-                 <input type="text" name="name" placeholder="Introduzca su nombre" class="form-control" value="{{  old('name') }}">                        
+                 <input type="text" name="name" placeholder="Introduzca su nombre" class="form-control" value="{{  old('name') }}" required>                        
              </div>                 
 
              {{--  <div class="form-group">

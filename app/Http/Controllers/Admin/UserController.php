@@ -58,8 +58,9 @@ class UserController extends Controller
         //return view();
     }
 
-    public function edit($id)
+    public function edit($id, Request $request)
     {
+        
         $user = User::find($id);
         $requirements = Requirement::all();
 
@@ -73,15 +74,15 @@ class UserController extends Controller
         
         $rules  = [
             'name' => 'required|max:255',            
-            'password' => 'required|min:6',
-            'password_confirmation' => 'required|same:password',
+            'password' => 'nullable',
+            'password_confirmation' => 'same:password',
         ];
 
         $messages = [
             'name.required' =>  'Es necesario ingresar el nombre del usuario',
             'name.max'  =>      'El nombre es demasiado extenso',            
             'password.min'  =>  'La Contraseña debe presentar por lo menos 6 caracteres',
-            'password_confirmation.required' =>   'La Contraseña no coincide con la introducida anteriormente',
+            'password_confirmation.same' =>   'La Contraseña no coincide con la introducida anteriormente',
 
         ];
 

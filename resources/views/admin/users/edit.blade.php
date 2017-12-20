@@ -39,7 +39,7 @@
             {{--  nuevo formulario de validacion de contrasena   --}}
             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                 <label for="password" class="col-md-6 control-label">Contraseña<em> "Ingresar solo si desea modificar" </em></label>
-                <input id="password" type="password" name="password" placeholder="Introduzca su Contraseña" class="form-control" value="{{  old('password') }}" required>
+                <input id="password" type="password" name="password" placeholder="Introduzca su Contraseña" class="form-control" value="{{  old('password') }}" >
 
                     @if ($errors->has('password'))
                         <span class="help-block">
@@ -48,9 +48,9 @@
                     @endif                
             </div>
 
-            <div class="form-group">
+            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                 <label for="password-confirm" class="col-md-6 control-label">Confirmar Contraseña</label>
-                <input id="password-confirm" type="password" class="form-control" placeholder="Confirme su Contraseña" name="password_confirmation" value="{{  old('password') }}" required>
+                <input id="password-confirm" type="password" class="form-control" placeholder="Confirme su Contraseña" name="password_confirmation" value="{{  old('password') }}">
                  
             </div>
            {{--  termina el forumulario de confirmacion de contrasena  --}}
