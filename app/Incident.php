@@ -9,6 +9,30 @@ class Incident extends Model
     public function category()
     {
 
-        return $this->belongsTo('App/Category');
+        return $this->belongsTo('App\Category');
+    }
+
+
+    public function getPriorityFullAttribute()
+    {
+
+        switch ($this->priority) {
+
+            case 'M':
+                return 'Menor';
+
+            case 'N':
+                return 'Normal';
+
+            default:
+                return 'Alta';
+        }
+    }
+
+    public function getTitleShortAttribute()
+    {
+
+        return mb_strimwidth($this->title, 0, 20, '...');
+       
     }
 }
