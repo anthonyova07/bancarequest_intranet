@@ -22,10 +22,11 @@ Route::get('/home', 'HomeController@index');
 Route::get('/seleccionar/requerimiento/{id}', 'HomeController@selectRequirement');
 
 //Crea la ruta de crear solicitudes
-Route::get('/ver_reportes', 'HomeController@view');
+
 Route::get('/reportar', 'IncidentController@create');
 Route::post('/reportar', 'IncidentController@store');
 
+Route::get('/ver/{id}', 'IncidentController@show');
 
 
 //Este grupo de rutas solo le brinda acceso a los usuarios con el rol de ADMIN
