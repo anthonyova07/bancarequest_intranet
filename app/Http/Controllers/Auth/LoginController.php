@@ -37,19 +37,19 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    // protected function authenticated()
-    // {
-    //     $user = auth()->user();
+    protected function authenticated()
+    {
+        $user = auth()->user();
 
-    //     if ($user->is_admin  || $user->is_client)
-    //     return;
+        if ($user->is_admin  || $user->is_client)
+        return;
 
 
-    //     //Soporte
-    //     if (! $user->requirement_id)  {
-
-    //         $user->requirement_id = $user->requirements->first()->id;
-    //         $user->save();
-    //     }
-    // }
+        //Soporte
+        if (! $user->selected_requirement_id)  {
+            
+            $user['selected_requirement_id'] = $user->requirements->first()->id;
+            $user->save();
+        }
+    }
 }
