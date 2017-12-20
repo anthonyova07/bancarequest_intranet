@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','selected_requirement_id',
     ];
    
 
@@ -54,6 +54,12 @@ class User extends Authenticatable
     public function getIsAdminAttribute()
     {
         return $this->role == 0;
+
+    }
+
+    public function getIsSupportAttribute()
+    {
+        return $this->role == 1;
 
     }
 
