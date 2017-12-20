@@ -12,12 +12,11 @@
                     <a href="/reportar">Crear Solicitud</a>
                 </li>
                 
-                {{--  @if(! auth()->user()->is_client)
+                @if(! auth()->user()->is_client)
                 <li  @if(request()->is('ver_reportes')) class="active" @endif>
-                    <a href="/home">Ver Solicitudes</a>
+                    <a href="/ver/{id}">Ver Solicitud</a>
                 </li>
-                @endif  --}}
-                
+                @endif
                 
                 @if(auth()->user()->is_admin)
                 <li role="presentation" class="dropdown">
