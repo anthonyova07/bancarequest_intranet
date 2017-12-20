@@ -30,34 +30,42 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //$user = User::all();
         $user = auth()->user();
-        $my_incidents = Incident::where('requirement_id', 1)
-                    ->where('support_id',$user->id)->get();
+        $selected_requirement_id  = $user->selected_requirement_id;
+        
+        if ($user->is_support || $user->is_admin)
+            {
+            //Se distribuyen las solicitudes por categorias segun la responsabilidad
+            $my_incidents = Incident::where('requirement_id', $selected_requirement_id)
+                        ->where('support_id',$user->id)->get();
 
-        $requirementUser = RequirementUser::where('requirement_id', 1)
-                    ->where('user_id',$user->id)->first();
+            $requirementUser = RequirementUser::where('requirement_id',$selected_requirement_id)
+                        ->where('user_id',$user->id)->first();
 
-        $pending_incidents = Incident::where('support_id', null)
-                    ->where('level_id',$requirementUser['level_id'])->get();
-
+            $pending_incidents = Incident::where('support_id', null)
+                        ->where('level_id',$requirementUser['level_id'])->get();
+            }
+            
         $incidents_by_me = Incident::where('client_id', $user->id)
-                    ->where('requirement_id',1);
+                    ->where('requirement_id',$selected_requirement_id)->get();
 
-        // dd($pending_incidents);
+        // dd($user);
         return view('home')->with(compact('my_incidents','pending_incidents','incidents_by_me'));
         // ->where('support_id',$requirementUser->level_id)
     }
 
-    public function view()
-    {
-        return view('welcome');
-    }
+    // public function view()
+    // {
+    //     return view('welcome');
+    // }
+
 
     public function selectRequirement($id)
     {
         //validar que el usuario este asociado con el requerimiento
         $user = auth()->user();
-        $user->requirement_id = $id;
+        $user->selected_requirement_id = $id;
         $user->save();
 
         return back();
