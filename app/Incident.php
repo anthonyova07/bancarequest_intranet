@@ -12,6 +12,12 @@ class Incident extends Model
         return $this->belongsTo('App\Category');
     }
 
+    public function requirement()
+    {
+
+        return $this->belongsTo('App\Requirement');
+    }
+
 
     public function getPriorityFullAttribute()
     {
