@@ -24,7 +24,7 @@
             </div>           
         @endif
     
-        <table class="table table-bordered">
+    <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Codigo</th>
@@ -33,17 +33,14 @@
                     <th>Fecha de envio</th> 
                 </tr> 
             </thead>            
-            <tbody>
+            <tbody>            
                 <tr>
-                    <td >WEWDW-232321esas22</td>
-                    <td >WEWDADX-erw224242</td>
-                    <td >General</td>
-                    <td >hace 3 meses</td>
-                </tr>
-            </tbody>
-        </table>
-    
-        <table class="table table-bordered">
+                    <td id="incident_key"> 12 </td>  {{-- {{ $incident['id'] }} --}}
+                    <td id="incident_project"> Requerimiento A  </td>  {{-- {{ $incident->requirement->name }}  --}}
+                    <td id="incident_category"> Categoria A1 </td>  {{-- {{ $incident->category_name }}  --}}
+                    <td id="incident_created_at"> 2017-12-21 </td> {{-- {{ $incident->created_at }}  --}}
+                </tr>           
+            </tbody>  
             <thead>
                 <tr>
                     <th>Asignada a</th>
@@ -51,8 +48,7 @@
                     <th>Estado</th>
                     <th>Prioridad</th> 
                 </tr> 
-            </thead>
-            
+            </thead>            
             <tbody>
                 <tr>
                     <td id="incident-responsible">Juan Carlos</td>
@@ -61,7 +57,7 @@
                     <td id="incident-priority">Alta</td>
                 </tr>
             </tbody>
-        </table>
+    </table>
        
     </div>
 </div>
