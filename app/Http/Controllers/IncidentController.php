@@ -20,23 +20,25 @@ class IncidentController extends Controller
     public function show($id)
     {
 
-        // $incident = Incident::find($id);
-        $user = auth()->user();
-        $selected_requirement_id  = $user->selected_requirement_id;
+        
 
-        $incident = Incident::where('requirement_id', 1)
-                    ->where('category_id',1)->get();
-        // $incident = Incident::where('id', 1)->get();
-        // $requirement = Incident::where('requirement_id', 2 )->get(); //$incident->requirement_id
-        // $category = Incident::where('category_id', 2 )->get(); //$incident->category_id
-        // $created_at = Incident::where('created_at',3 )->get(); //$incident->created_at
+        $incident = Incident::findOrFail($id);
+        // $user = auth()->user();
+        // $selected_requirement_id  = $user->selected_requirement_id;
+
+        // $incident = Incident::where('requirement_id', 1)
+        //             ->where('category_id',1)->get();
+        // $incident = Incident::where('id',3)->first();
+        // $requirement = Requirement::where('id', 1 )->first(); //$incident->requirement_id
+        // $category = Category::where('id', 1 )->first(); //$incident->category_id
+        // // $created_at = Incident::where('created_at',3 )->get(); //$incident->created_at
        
         // $requirements = Requirement::all();   
-        // $incident = Incident::all();
+        // $incident = Incident::all()->first();
         // $value = $incidents->get('id');
         // $incident = DB::table('incidents')->where('id',1)->get();
         // $incident = Incident::where('id',1)->get();
-        // dd($requirement);
+        // dd($incident);
         return view('incidents.show')->with(compact('incident'));
     }
 

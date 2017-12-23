@@ -18,6 +18,18 @@ class Incident extends Model
         return $this->belongsTo('App\Requirement');
     }
 
+    public function support()
+    {
+
+        return $this->belongsTo('App\User', 'support_id');
+    }
+
+    public function client()
+    {
+
+        return $this->belongsTo('App\User', 'client_id');
+    }
+
 
     public function getPriorityFullAttribute()
     {
@@ -49,5 +61,34 @@ class Incident extends Model
             return $this->category->name;
         }
         return 'General';
+    }
+
+    public function getSupportNameAttribute()
+    {
+        if ($this->support)
+        {
+            return $this->support->name;
+        }
+        return 'Sin asignar';
+    }
+
+    public function getStateAttribute()
+    {
+        if ($this->active == 1)
+        {
+            return 'Resuelto';
+        }
+
+        elseif ($this->support_id)
+        { 
+            return 'Asignado';            
+        }
+        else
+        {
+            return 'Pendiente';
+        }
+
+       
+        
     }
 }

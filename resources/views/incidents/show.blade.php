@@ -35,10 +35,10 @@
             </thead>            
             <tbody>            
                 <tr>
-                    <td id="incident_key"> 12 </td>  {{-- {{ $incident['id'] }} --}}
-                    <td id="incident_project"> Requerimiento A  </td>  {{-- {{ $incident->requirement->name }}  --}}
-                    <td id="incident_category"> Categoria A1 </td>  {{-- {{ $incident->category_name }}  --}}
-                    <td id="incident_created_at"> 2017-12-21 </td> {{-- {{ $incident->created_at }}  --}}
+                    <td id="incident_key"> {{ $incident->id }}  </td> 
+                    <td id="incidente_requirement"> {{ $incident->requirement->name}} </td>  {{--  {{ $requirement['name'] }}  --}}
+                    <td id="incidente_category"> {{ $incident->category_name}} </td>  
+                    <td id="incidente_requirement"> {{ $incident->created_at }} </td> 
                 </tr>           
             </tbody>  
             <thead>
@@ -51,13 +51,52 @@
             </thead>            
             <tbody>
                 <tr>
-                    <td id="incident-responsible">Juan Carlos</td>
-                    <td >Publico</td>
-                    <td id="incident-state">En progreso</td>
-                    <td id="incident-priority">Alta</td>
+                    <td id="incidente_responsible">{{ $incident->support_name }} </td>
+                    <td >Publico </td>
+                    <td id="incidente_state">{{ $incident->state }} </td>
+                    <td id="incidente_severity" >{{ $incident->priority_full }} </td>
                 </tr>
             </tbody>
     </table>
+
+    <table class="table table-bordered">            
+                <tr>
+                    <th>Titulo</th>
+                    <td id="incident_summary"> {{ $incident->title }}  </td> 
+                </tr>
+                <tr>
+                    <th>Descripcion</th>
+                    <td id="incident_description">  {{ $incident->description }}   </td> 
+                </tr>
+                <tr>
+                    <th>Adjuntos</th>
+                    <td id="incident_attachament"> No  se han adjuntado archivos  </td> 
+                </tr>       
+    </table>
+    <button class="btn btn-primary btn-sm"  id="incident_btn_apply">
+        Atender Solicitud
+    
+    </button>
+
+    <button class="btn btn-info btn-sm"  id="incident_btn_open">
+       Volver a abrir Solicitud
+    
+    </button>
+
+    <button class="btn btn-info btn-sm"  id="incident_btn_solve">
+       Marcar como resuelta
+    
+    </button>
+
+    <button class="btn btn-success btn-sm"  id="incident_btn_edit">
+        Editar Solicitud
+    
+    </button>
+
+    <button class="btn btn-danger btn-sm"  id="incident_btn_derive">
+        Derivar al siguiente nivel
+    
+    </button>
        
     </div>
 </div>
