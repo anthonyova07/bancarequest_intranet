@@ -53,7 +53,15 @@
                 <tr>
                     <td id="incidente_responsible">{{ $incident->support_name }} </td>
                     <td >Publico </td>
-                    <td id="incidente_state">{{ $incident->state }} </td>
+                    
+                    @if ($incident->support_id )
+                        <td id="incidente_state">Asignado</td>
+                        @elseif ($incident->state == 0)
+                            <td id="incidente_state">Resuelto</td>
+                        @else
+                            <td id="incidente_state">Pendiente</td>
+                    @endif
+
                     <td id="incidente_severity" >{{ $incident->priority_full }} </td>
                 </tr>
             </tbody>
@@ -73,30 +81,34 @@
                     <td id="incident_attachament"> No  se han adjuntado archivos  </td> 
                 </tr>       
     </table>
-    <button class="btn btn-primary btn-sm"  id="incident_btn_apply">
-        Atender Solicitud
-    
-    </button>
+    @if ($incident->support_id == null && $incident->state)
+    <a href="/incidencia/{{ $incident->id }}/atender" class="btn btn-primary btn-sm"  id="incident_btn_apply">
+        Atender Solicitud    
+    </a>
+    @endif
 
-    <button class="btn btn-info btn-sm"  id="incident_btn_open">
-       Volver a abrir Solicitud
-    
-    </button>
+    @if ((auth()->user()->id == $incident->client_id))
+        @if ($incident->state == 0)
+            <a href="/incidencia/{{ $incident->id }}/resolver" class="btn btn-info btn-sm"  id="incident_btn_solve">
+                Marcar como resuelta    
+            </a>
+                  
+            <a href="/incidencia/{{ $incident->id }}/abrir" class="btn btn-info btn-sm"  id="incident_btn_open">
+                Volver a abrir Solicitud    
+            </a>
+        @endif
 
-    <button class="btn btn-info btn-sm"  id="incident_btn_solve">
-       Marcar como resuelta
-    
-    </button>
+    @endif
 
-    <button class="btn btn-success btn-sm"  id="incident_btn_edit">
-        Editar Solicitud
-    
-    </button>
+    <a href="/incidencia/{{ $incident->id }}/editar" class="btn btn-success btn-sm"  id="incident_btn_edit">
+        Editar Solicitud    
+    </a>
 
-    <button class="btn btn-danger btn-sm"  id="incident_btn_derive">
-        Derivar al siguiente nivel
-    
-    </button>
+    @if (auth()->user()->id == $incident->support_id && $incident->state == 0)
+    <a href="/incidencia/{{ $incident->id }}/derivar" class="btn btn-danger btn-sm"  id="incident_btn_derive">
+        Derivar al siguiente nivel    
+    </a>
+    @endif
        
     </div>
 </div>

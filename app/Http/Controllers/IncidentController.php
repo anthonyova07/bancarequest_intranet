@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Incident;
 use App\Requirement;
+use App\RequirementUser;
 
 class IncidentController extends Controller
 {
@@ -23,22 +24,7 @@ class IncidentController extends Controller
         
 
         $incident = Incident::findOrFail($id);
-        // $user = auth()->user();
-        // $selected_requirement_id  = $user->selected_requirement_id;
-
-        // $incident = Incident::where('requirement_id', 1)
-        //             ->where('category_id',1)->get();
-        // $incident = Incident::where('id',3)->first();
-        // $requirement = Requirement::where('id', 1 )->first(); //$incident->requirement_id
-        // $category = Category::where('id', 1 )->first(); //$incident->category_id
-        // // $created_at = Incident::where('created_at',3 )->get(); //$incident->created_at
        
-        // $requirements = Requirement::all();   
-        // $incident = Incident::all()->first();
-        // $value = $incidents->get('id');
-        // $incident = DB::table('incidents')->where('id',1)->get();
-        // $incident = Incident::where('id',1)->get();
-        // dd($incident);
         return view('incidents.show')->with(compact('incident'));
     }
 
@@ -98,4 +84,72 @@ class IncidentController extends Controller
         return back()->with('notification', 'La solicitud se ha registrado correctamente');
         
     }
+
+
+    public function take($id)
+    {
+        $user = auth()->user();
+
+        if (!($user->is_support || $user->is_admin))
+            return back();
+
+        $incident = Incident::findOrFail($id);
+
+        //Existe alguna relacion entre el usuario y el requerimiento?
+        $requirement_user = RequirementUser::where('requirement_id', $incident->requirement_id)
+                                                ->where('user_id', $user->id)->first();
+        if (! $requirement_user)
+            return back(); 
+        //El nivel es el mismo? 
+        if ($requirement_user->level_id != $incident->level_id)
+            return back(); 
+
+        $incident->support_id = $user->id;
+        $incident->save();
+
+        return back();
+    }
+
+    public function solve($id)
+    {
+        $incident = Incident::findOrFail($id);
+
+        if ($incident->client_id != auth()->user()->id)
+            {
+                return back();
+            }
+        $incident->state = 1;
+        $incident->save();
+
+        return back();
+        
+    }
+
+    public function open($id)
+    {
+        $incident = Incident::findOrFail($id);
+
+        if ($incident->client_id != auth()->user()->id)
+        {
+            return back();
+        }
+        $incident->state = 0;
+        $incident->save();
+
+        return back();
+        
+    }
+
+    public function edit($id)
+    {
+        $incident = Incident::findOrFail($id);
+        
+    }
+
+    public function nextLevel($id)
+    {
+        $incident = Incident::findOrFail($id);
+        
+    }
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Requirement;
 
 class LoginController extends Controller
 {
@@ -40,15 +41,15 @@ class LoginController extends Controller
     protected function authenticated()
     {
         $user = auth()->user();
-
-        if ($user->is_admin  || $user->is_client)
-        return;
-
-
-        //Soporte
         if (! $user->selected_requirement_id)  {
-            
-            $user['selected_requirement_id'] = $user->requirements->first()->id;
+            if ($user->is_admin  || $user->is_client){
+                $user->selected_requirement_id = Requirement::first()->id;
+                                
+            }else{ //Soporte
+                // Y si el usuario de soporte no esta asociado a ningun requerimiento
+                $user->selected_requirement_id = $user->requirements->first()->id;
+
+            }
             $user->save();
         }
     }

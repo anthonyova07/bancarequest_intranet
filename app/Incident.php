@@ -72,23 +72,23 @@ class Incident extends Model
         return 'Sin asignar';
     }
 
-    public function getStateAttribute()
-    {
-        if ($this->active == 1)
-        {
-            return 'Resuelto';
-        }
+    // public function getStateAttribute()
+    // {
 
-        elseif ($this->support_id)
-        { 
-            return 'Asignado';            
-        }
-        else
-        {
-            return 'Pendiente';
-        }
+    //     if (($this->active == 0))
+    //     {
+    //         return 'Resuelto';
+    //     }ten
+
+    //     if ( $this->support_id ) //$this->support_id ||
+    //     { 
+    //         return 'Asignado';            
+    //     }
+       
+    //     return 'Pendiente';
+        
 
        
         
-    }
+    // }
 }

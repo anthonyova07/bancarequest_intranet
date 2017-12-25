@@ -22,16 +22,6 @@ class UsersTableSeeder extends Seeder
 
         ]);
 
-        //Soporte
-        User::create([
-            
-                'name'  => 'juana',
-                'email'  => 'soporte@bancamerica.com',
-                'password'  => bcrypt('123123'),
-                'role'  => '1'
-
-        ]);
-
         //Cliente
         User::create([
             

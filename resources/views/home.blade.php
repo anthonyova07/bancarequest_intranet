@@ -34,7 +34,14 @@
                                 </td>
                                 <td>{{$incident->category->name}}</td>
                                 <td>{{$incident->priority_full}}</td>
-                                <td>{{$incident->state}}</td>
+                                @if ($incident->state == 0 )
+                                    <td id="incidente_state">Asignado</td>
+                                    @elseif ($incident->state == 1)
+                                        <td id="incidente_state">Resuelto</td>
+                                    @else
+                                        <td id="incidente_state">Pendiente</td>
+                                @endif
+
                                 <td>{{$incident->created_at}}</td>
                                 <td>{{$incident->title_short}}</td>
                             </tr>
@@ -73,7 +80,13 @@
                                 </td>
                                 <td>{{$incident->category_name}}</td>
                                 <td>{{$incident->priority_full}}</td>
-                                <td>{{$incident->state}}</td>
+                                @if ($incident->state == 0 )
+                                    <td id="incidente_state">Asignado</td>
+                                    @elseif ($incident->state == 1)
+                                        <td id="incidente_state">Resuelto</td>
+                                    @else
+                                        <td id="incidente_state">Pendiente</td>
+                                @endif
                                 <td>{{$incident->created_at}}</td>
                                 <td>{{$incident->title_short}}</td>
                                 <td>
@@ -117,11 +130,17 @@
                                 </td>
                                 <td>{{$incident->category_name}}</td>
                                 <td>{{$incident->priority_full}}</td>
-                                <td>{{$incident->state}}</td>
+                                @if ($incident->support_id )
+                                    <td id="incidente_state">Asignado</td>
+                                    @elseif ($incident->state == 0)
+                                        <td id="incidente_state">Resuelto</td>
+                                    @else
+                                        <td id="incidente_state">Pendiente</td>
+                                @endif
                                 <td>{{$incident->created_at}}</td>
                                 <td>{{$incident->title_short}}</td>
                                 <td>
-                                    {{$incident->support_id ?: 'Sin asignar'}}  
+                                    {{$incident->support_name ?: 'Sin asignar'}}  
                                 </td>
                             </tr>
                         @endforeach                    

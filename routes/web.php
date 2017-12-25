@@ -28,6 +28,12 @@ Route::post('/reportar', 'IncidentController@store');
 
 Route::get('/ver/{id}', 'IncidentController@show');
 
+Route::get('/incidencia/{id}/atender', 'IncidentController@take');
+Route::get('/incidencia/{id}/resolver', 'IncidentController@solve');
+Route::get('/incidencia/{id}/abrir', 'IncidentController@open');
+Route::get('/incidencia/{id}/editar', 'IncidentController@edit');
+Route::get('/incidencia/{id}/derivar', 'IncidentController@nextLevel');
+
 
 //Este grupo de rutas solo le brinda acceso a los usuarios con el rol de ADMIN
 Route::group(['middleware' => 'admin', 'namespace' => 'Admin'], function () {
