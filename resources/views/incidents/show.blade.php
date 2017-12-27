@@ -54,7 +54,7 @@
                     <td id="incidente_responsible">{{ $incident->support_name }} </td>
                     <td >Publico </td>
                     
-                    @if ($incident->support_id )
+                    @if ($incident->support_id && $incident->state == 1 )
                         <td id="incidente_state">Asignado</td>
                         @elseif ($incident->state == 0)
                             <td id="incidente_state">Resuelto</td>
@@ -66,7 +66,6 @@
                 </tr>
             </tbody>
     </table>
-
     <table class="table table-bordered">            
                 <tr>
                     <th>Titulo</th>
@@ -87,24 +86,25 @@
     </a>
     @endif
 
-    @if ((auth()->user()->id == $incident->client_id))
-        @if ($incident->state == 0)
-            <a href="/incidencia/{{ $incident->id }}/resolver" class="btn btn-info btn-sm"  id="incident_btn_solve">
-                Marcar como resuelta    
-            </a>
-                  
-            <a href="/incidencia/{{ $incident->id }}/abrir" class="btn btn-info btn-sm"  id="incident_btn_open">
-                Volver a abrir Solicitud    
-            </a>
-        @endif
-
+    {{--  @if (auth()->user()->id == $incident->is_client)  --}}
+    @if (!(auth()->user()->id == $incident->support_id) && $incident->state == 1)
+        <a href="/incidencia/{{ $incident->id }}/resolver" class="btn btn-info btn-sm"  id="incident_btn_solve">
+            Marcar como resuelta    
+        </a>
     @endif
+    @if (!(auth()->user()->id == $incident->support_id) && @$incident->state == 0)                 
+        <a href="/incidencia/{{ $incident->id }}/abrir" class="btn btn-info btn-sm"  id="incident_btn_open">
+            Volver a abrir Solicitud    
+        </a>
+    @endif
+
+    {{--  @endif  --}}
 
     <a href="/incidencia/{{ $incident->id }}/editar" class="btn btn-success btn-sm"  id="incident_btn_edit">
         Editar Solicitud    
     </a>
 
-    @if (auth()->user()->id == $incident->support_id && $incident->state == 0)
+    @if (auth()->user()->id == $incident->support_id && $incident->state == 1)
     <a href="/incidencia/{{ $incident->id }}/derivar" class="btn btn-danger btn-sm"  id="incident_btn_derive">
         Derivar al siguiente nivel    
     </a>
