@@ -114,11 +114,11 @@ class IncidentController extends Controller
     {
         $incident = Incident::findOrFail($id);
 
-        if ($incident->client_id != auth()->user()->id)
+        if ($incident->client_id  != auth()->user()->id)
             {
                 return back();
             }
-        $incident->state = 1;
+        $incident->state = 0;
         $incident->save();
 
         return back();
@@ -129,11 +129,11 @@ class IncidentController extends Controller
     {
         $incident = Incident::findOrFail($id);
 
-        if ($incident->client_id != auth()->user()->id)
+        if ($incident->client_id  != auth()->user()->id)
         {
             return back();
         }
-        $incident->state = 0;
+        $incident->state = 1;
         $incident->save();
 
         return back();
