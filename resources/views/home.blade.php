@@ -34,9 +34,9 @@
                                 </td>
                                 <td>{{$incident->category->name}}</td>
                                 <td>{{$incident->priority_full}}</td>
-                                @if ($incident->state == 0 )
+                                @if ($incident->support_id && $incident->state == 1 )
                                     <td id="incidente_state">Asignado</td>
-                                    @elseif ($incident->state == 1)
+                                    @elseif ($incident->state == 0)
                                         <td id="incidente_state">Resuelto</td>
                                     @else
                                         <td id="incidente_state">Pendiente</td>
@@ -80,9 +80,9 @@
                                 </td>
                                 <td>{{$incident->category_name}}</td>
                                 <td>{{$incident->priority_full}}</td>
-                                @if ($incident->state == 0 )
+                                @if ($incident->support_id )
                                     <td id="incidente_state">Asignado</td>
-                                    @elseif ($incident->state == 1)
+                                    @elseif ($incident->state == 0)
                                         <td id="incidente_state">Resuelto</td>
                                     @else
                                         <td id="incidente_state">Pendiente</td>
@@ -130,7 +130,7 @@
                                 </td>
                                 <td>{{$incident->category_name}}</td>
                                 <td>{{$incident->priority_full}}</td>
-                                @if ($incident->support_id )
+                                @if ($incident->support_id && $incident->state == 1 )
                                     <td id="incidente_state">Asignado</td>
                                     @elseif ($incident->state == 0)
                                         <td id="incidente_state">Resuelto</td>
